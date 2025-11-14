@@ -10,6 +10,13 @@ Subair Backend is a Spring Boot 3.5.7 application using Java 21 and Maven for bu
 **Artifact ID**: `subair`
 **Base Package**: `com.biryuzabear.subair`
 
+## Git Workflow Rules
+
+**IMPORTANT**: Do NOT create commits automatically or proactively. Only create commits when explicitly requested by the user.
+
+### Commit Convention
+This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification. Use the `/commit` command to create properly formatted commits.
+
 ## Build and Development Commands
 
 ### Prerequisites
@@ -66,6 +73,33 @@ curl http://localhost:8080/actuator
 # Compile without running
 ./mvnw compile
 ```
+
+### Docker
+
+```bash
+# Build Docker image
+docker build -t subair-backend .
+
+# Run container
+docker run -p 8080:8080 subair-backend
+
+# Run container in detached mode
+docker run -d -p 8080:8080 --name subair subair-backend
+
+# View logs
+docker logs subair
+
+# Stop container
+docker stop subair
+
+# Remove container
+docker rm subair
+```
+
+The Dockerfile uses multi-stage build:
+- **Build stage**: Uses Maven to build the application
+- **Runtime stage**: Uses lightweight JRE image to run the application
+- Exposes port 8080 for the application
 
 ## Project Architecture
 
